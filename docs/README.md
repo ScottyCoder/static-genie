@@ -1,12 +1,28 @@
-# StaticGenie
+Creating dynamic websites is tiresome and getting more complex as time passes. Creating a basic web page as a way of publishing information should be easy, even today.
 
-Creating dynamic websites is tiresome and getting more complex as time passes. Creating a basic web page as a way of publishing information should still be easy.
+Given I have some time while I'm now unemployed (and freeeeeeee) I thought it would be good to create something open source. But what?
 
-Given I have some time while unemployed I thought it would be good to create something open source. But what?
+I know JavaScript pretty well (I think) and given the problem above I had might as well create a static website generator with a JavaScript developer in mind. I'm sure there are other JavaScript developers out there with the same problem as myself. There are probably even existing static website generators written in JavaScript (but it's not as fun using one of those than it is writing it yourself, right?). 
 
-I know JavaScript pretty well (I think) and had might as well create a static website generator with a JavaScript developer in mind. I'm sure there are other JavaScript developers out there with the same problem as myself. Hopefully I can give back something of value to the programming community.
+Hopefully I can give back something of value to the programming community. In the event I do a terrible job of StaticGenie. At least I can have some fun creating StaticGenie and brush up on my programming skills again.
 
+Some features (might) include;
 
+- Perfect (probably should not have written that) yet simple documentation
+- Unit testing (obvs)
+- Switchable templates/themes
+- Plugins to pull in data from external sources
+- Command line tools for various things such as running unit tests, building the site, watching for changes during development, deploying to 3rd party static hosting platforms, etc...
+- Building a community around it (themes, plugins, etc)
+- Anything suggested from the community that's sexy!!
 
-Source Code: https://github.com/StaticGenie
-Website: https://staticgenie.com
+Also, feel free to issue pull requests. Always welcome of any great updates from the community.
+
+- Website: [https://staticgenie.com](https://staticgenie.com)
+- Source Code: [https://github.com/StaticGenie](https://github.com/StaticGenie)
+- Twitter: [https://twitter.com/StaticGenie](https://twitter.com/StaticGenie)
+- Reddit: [https://reddit.com/u/StaticGenie](https://reddit.com/u/StaticGenie)
+
+Scott
+
+*Last Updated: 3rd November 2020*
