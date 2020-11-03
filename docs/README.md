@@ -16,7 +16,7 @@ Some features (might) include;
 - Building a community around it (themes, plugins, etc)
 - Anything suggested from the community that's sexy!!
 
-Also, feel free to issue pull requests. Always welcome of any great updates from the community.
+Also, feel free to issue pull requests. Always welcome any great updates from the community.
 
 - Website: [https://staticgenie.com](https://staticgenie.com)
 - Source Code: [https://github.com/StaticGenie](https://github.com/StaticGenie)
