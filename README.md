@@ -1,2 +1,1 @@
-# static-genie
-Built for JavaScript programmers to intuitively create static websites
+The public website for StaticGenie.com
