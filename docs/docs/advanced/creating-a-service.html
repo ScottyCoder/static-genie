@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <title>StaticGenie</title>
+<link rel="stylesheet" href="/assets/global.css" />
+        <style>
+            .toc {
+                float:left;
+                width:150px;
+            }
+            .toc > ul > li {
+                padding-bottom:30px;
+                font-weight:bold;
+                line-height:1.3;
+            }
+            .toc > ul > li > ul > li {
+                padding-left:20px;
+                font-size:smaller;
+                font-weight:normal;
+                padding-top:8px;
+                line-height:1.3;
+            }
+            .page {
+                margin-left:180px;
+                padding-left:30px;
+                border-left: solid 1px #AAA;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+    <div class='constrict'>
+        <div class='social'>
+            
+                <a href='https://github.com/StaticGenie/StaticGenie' target='_blank'><img src='/assets/images/github.png' title="GitHub" /></a>
+            
+                <a href='https://reddit.com/u/StaticGenie' target='_blank'><img src='/assets/images/reddit.png' title="Reddit" /></a>
+            
+                <a href='https://twitter.com/StaticGenie' target='_blank'><img src='/assets/images/twitter.png' title="Twitter" /></a>
+            
+        </div>
+        <ul>
+            <li class='logo'><a href='/index.html'>StaticGenie</a></li>
+            <li class='sep'>|</li>
+            
+                <li><a href='/index.html'>Home</a></li>
+            
+                <li><a href='/docs/getting-started/installation.html'>Docs</a></li>
+            
+                <li><a href='/roadmap.html'>Roadmap</a></li>
+            
+        </ul>
+    </div>
+</nav>
+        
+<section class='jumbotron'>
+    Creating A Service
+</section>
+
+        <section class='canvas constrict'>
+            <div class='toc'>
+                <ul>
+                
+                    <li>
+                        Getting Started
+                        <ul>
+                            
+                                <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
+                            
+                                <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
+                            
+                                <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        Advanced
+                        <ul>
+                            
+                                <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
+                            
+                                <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
+                            
+                                <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
+                            
+                        </ul>
+                    </li>
+                
+            </ul>
+            </div>
+            <div class='page'>
+                <h1>What is a service provider</h1>
+<p>A service provides capabilities mostly for plugins to use. Services are instantiated once by the framework and that same instance shared across all plugins. Services are access via interfaces to allow them to be switched out for different implementations.</p>
+<h2>Example service providers</h2>
+<ul>
+<li><code>pagewriter</code> - responsible for writing “pages” (such as web pages) to the disk, console, etc</li>
+<li><code>report</code> - responsible for generating a report on how the website generation went (i.e. did all the pages get generated ok)</li>
+<li><code>theme</code> - responsible for rendering a template into pages</li>
+<li><code>globalmodel</code> - responsible for storing the global model populated by the initialisation method of plugins</li>
+</ul>
+<h2>Service structure</h2>
+<p><strong>WARNING: Services are capable of using other services, however, other services should NOT be used during initialisation else it will create a dependency on the order in which the services are initialised. They can however safely be stored within the object for later use.</strong></p>
+<p>Here is a template for a new service. Replace <code>{SERVICENAME}</code> with the name of your service. Then save the file within <code>/src/libs/services/</code> as all lowercase.</p>
+<pre><code>import {iConfigService, iService, Services} from &quot;../libs/services&quot;
+
+/**
+* Allows you to provide multiple implementations of your service. This should be used when getting an instance of this service.
+*/
+export interface i{SERVICENAME} {
+    
+}
+
+/**
+* You don't have to export this, you can make it abstract but make sure you export one or more of it sub classes
+*/
+export class {SERVICENAME} implements iService, i{SERVICENAME} {
+
+    /**
+     * Initialise using provided config
+     * @param services 
+     * @param config
+     */
+    initialise(services:Services, config:i{SERVICENAME}Config) {
+        
+    }
+
+    /**
+     * Called when all plugins have initialised
+     */
+    pluginsInitialised() {
+
+    }
+
+    /**
+     * Called when all plugins have generated their respective pages
+     */
+    pluginsGenerated() {
+
+    }
+
+}
+
+/**
+* Defines the configuration (if any) that can be configured within `/config.ts`
+*/
+export interface i{SERVICENAME}Config extends iConfigService {
+
+}
+</code></pre>
+<h2>Registering &amp; configuring the service</h2>
+<p>Open <code>/config.ts</code>.</p>
+<p>Locate the services sections. Within you will see two more sections <code>beforePluginsInitialised</code> and <code>afterPluginsInitialised</code>. You need to register your plugin and it’s configuration in the relevant section.</p>
+<ul>
+<li><code>beforePluginsInitialised</code> - If you want the plugins to be able to access your service during the initialisation stage (such as when building the shared global model) and during the plugins generator method then register it here. Most services won’t need to be registered here.</li>
+<li><code>afterPluginsInitialised</code> - Once all plugins have been initiated, your service becomes available to use within each plugins generator method.</li>
+</ul>
+<p>A service config looks like this.</p>
+<pre><code>&quot;../services/globalmodel&quot;: { 
+    
+    // The name used to get an instance of the service. DO NOT change this else any 3rd party dependencies will break. 
+    name: &quot;{SERVICENAME}&quot;, 
+    
+    // The class to create an instance of (you can switch this out since the service should be developed against the interface defined within the file)
+    class: {CLASSNAME}.name,
+    
+    // The config interface used to help define the correct format of the config followed by the actual configuration of the service
+    config: &lt;i{CLASSNAME}Config&gt;{}
+
+},
+</code></pre>
+<p>An example of a completed service registered within the <code>beforePluginsInitialised</code> section.</p>
+<pre><code>services: {
+    beforePluginsInitialised: {
+        &quot;../services/globalmodel&quot;: { 
+            name: &quot;globalmodel&quot;, 
+            class: GlobalModel.name,
+            config: &lt;iGlobalModelConfig&gt;{}
+        },
+    },
+    afterPluginsInitialised: {
+        
+    },
+}
+</code></pre>
+<p>If installed (and classes/interfaces imported) correctly, you should be able to call the service within plugin methods and service methods like: <code>services.get(&quot;{NAME}&quot;).{METHOD}()</code></p>
+
+            </div>
+        </section>
+        <footer>
+    <div class='links'>&nbsp;&nbsp;<a href='/contact.html'>Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/credits.html'>Credits</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/license-and-terms.html'>License &amp; Terms</a>&nbsp;&nbsp;</div>
+    <div class='copyright'>Copyright &copy; 2020 StaticGenie, All Rights Reserved</div>
+</footer>
+    </body>
+</html>

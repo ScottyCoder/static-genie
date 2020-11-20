@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>StaticGenie</title>
+<link rel="stylesheet" href="/assets/global.css" />
+    </head>
+    <body>
+        <nav>
+    <div class='constrict'>
+        <div class='social'>
+            
+                <a href='https://github.com/StaticGenie/StaticGenie' target='_blank'><img src='/assets/images/github.png' title="GitHub" /></a>
+            
+                <a href='https://reddit.com/u/StaticGenie' target='_blank'><img src='/assets/images/reddit.png' title="Reddit" /></a>
+            
+                <a href='https://twitter.com/StaticGenie' target='_blank'><img src='/assets/images/twitter.png' title="Twitter" /></a>
+            
+        </div>
+        <ul>
+            <li class='logo'><a href='/index.html'>StaticGenie</a></li>
+            <li class='sep'>|</li>
+            
+                <li><a href='/index.html'>Home</a></li>
+            
+                <li><a href='/docs/getting-started/installation.html'>Docs</a></li>
+            
+                <li><a href='/roadmap.html'>Roadmap</a></li>
+            
+        </ul>
+    </div>
+</nav>
+        
+<section class='jumbotron'>
+    Roadmap
+</section>
+
+        <section class='canvas constrict'>
+            <div class='page'>
+                <h1>Current Sprint</h1>
+<p>1.0.0 (In Progress)</p>
+<ul>
+<li>Rename <code>pages</code> to <code>basicpages</code>. Referring to <code>pages</code> is too abstract when discussing details</li>
+<li>Review @ TODOs</li>
+<li>Deploy the website</li>
+<li>Feedback from community</li>
+</ul>
+<p>1.1.0 (Blog Support)</p>
+<ul>
+<li>Finish the blog plugin (currently a mess due to prototyping use cases) and refactor the required functionality out of the pages plugin</li>
+</ul>
+<h1>Backlog</h1>
+<p>Not yet scheduled.</p>
+<h2>Performance</h2>
+<ul>
+<li>Speed up build process by thinking more about how the NPM commands are composed (doing a full build from scratch shouldn’t be required to test a css change)</li>
+<li>Speed up page generation process by thinking where/how to implement caching</li>
+</ul>
+<h2>Community</h2>
+<ul>
+<li>Unit tests</li>
+<li>Create UML diagram of classes, interfaces and their relationships</li>
+<li>Create examples of common tasks</li>
+<li>Create public repo of plugins, service providers and themes</li>
+<li>Get involved with dev networks on places like reddit, linkedin, twitter, etc</li>
+</ul>
+<h2>Nice To Have</h2>
+<ul>
+<li>Figure out a way of reliably (DRY) changing the output directory for the generated website</li>
+<li>Embrace the github community tools like wiki, projects, bugs, etc</li>
+</ul>
+<h2>Bugs</h2>
+<ul>
+<li>If writer tries to write over another file. It should error via the report service provider</li>
+</ul>
+<h1>Idea Discussions</h1>
+<ul>
+<li>Create a proper dependency injection system around the services with proper constructor, register, init, boot, event system instead of old fashioned hooks, etc… Will break the API though so probably better for a version 2 thing once the use cases have been properly ironed out and the requirements defined</li>
+<li>Figure out an easy way of updating the framework (at the moment it’s going to be a clone as opposed to npm install)</li>
+<li>Support async… maybe… conflict between simplicity and performance here. Might be better to allow chunks of the framework to run in parallel so the simplicity is retained.</li>
+</ul>
+
+            </div>
+        </section>
+        <footer>
+    <div class='links'>&nbsp;&nbsp;<a href='/contact.html'>Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/credits.html'>Credits</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/license-and-terms.html'>License &amp; Terms</a>&nbsp;&nbsp;</div>
+    <div class='copyright'>Copyright &copy; 2020 StaticGenie, All Rights Reserved</div>
+</footer>
+    </body>
+</html>
