@@ -53,7 +53,7 @@
 </nav>
         
 <section class='jumbotron'>
-    Installation
+    Services
 </section>
 
         <section class='canvas constrict'>
@@ -74,6 +74,34 @@
                     </li>
                 
                     <li>
+                        Core
+                        <ul>
+                            
+                                <li><a href='/docs/core/services.html'>Services</a></li>
+                            
+                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                            
+                                <li><a href='/docs/core/libs.html'>Libs</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        How To
+                        <ul>
+                            
+                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                            
+                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                            
+                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                            
+                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
                         Advanced
                         <ul>
                             
@@ -89,36 +117,13 @@
             </ul>
             </div>
             <div class='page'>
-                <h1>Requirements</h1>
-<p>You will require the following to be installed on your machine;</p>
+                <h1>@TODO</h1>
 <ul>
-<li>Docker</li>
-<li>Git</li>
-<li>VSCode (Optional)</li>
+<li>globalmodel</li>
+<li>pagewriter</li>
+<li>report</li>
+<li>theme</li>
 </ul>
-<p><em>I would also recommend you also install VSCode as it works very well with TypeScript, JS and HTML. Of course, you’re still free to use your any other IDE of your choice</em></p>
-<h1>Installation</h1>
-<p>Clone the StaticGenie repo:</p>
-<p><code>git clone https://github.com/StaticGenie/StaticGenie.git directoryName</code></p>
-<p>Set the newly cloned repo as your current working directory:</p>
-<p><code>cd directoryName</code></p>
-<p>Then install the StaticGenie dependencies:</p>
-<p><code>docker-compose run sg npm install</code></p>
-<p>You should then be all setup and ready to go.</p>
-<h1>Troubleshooting</h1>
-<blockquote>
-<p>I get an error like this when running <code>docker-compose</code>:</p>
-</blockquote>
-<pre><code>Traceback (most recent call last):
-  File &quot;site-packages\docker\api\client.py&quot;, line 205, in _retrieve_server_version
-  
-etc...
-
-  File &quot;site-packages\docker\api\client.py&quot;, line 213, in _retrieve_server_version
-docker.errors.DockerException: Error while fetching server API version: (2, 'CreateFile', 'The system cannot find the file specified.')
-[10432] Failed to execute script docker-compose
-</code></pre>
-<p>You need to make sure you have docker running. Then try the <code>docker-compose</code> command again</p>
 
             </div>
         </section>

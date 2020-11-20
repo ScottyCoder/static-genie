@@ -1,0 +1,164 @@
+<html>
+    <head>
+        <title>StaticGenie</title>
+<link rel="stylesheet" href="/assets/global.css" />
+        <style>
+            .toc {
+                float:left;
+                width:150px;
+            }
+            .toc > ul > li {
+                padding-bottom:30px;
+                font-weight:bold;
+                line-height:1.3;
+            }
+            .toc > ul > li > ul > li {
+                padding-left:20px;
+                font-size:smaller;
+                font-weight:normal;
+                padding-top:8px;
+                line-height:1.3;
+            }
+            .page {
+                margin-left:180px;
+                padding-left:30px;
+                border-left: solid 1px #AAA;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+    <div class='constrict'>
+        <div class='social'>
+            
+                <a href='https://github.com/StaticGenie/StaticGenie' target='_blank'><img src='/assets/images/github.png' title="GitHub" /></a>
+            
+                <a href='https://reddit.com/u/StaticGenie' target='_blank'><img src='/assets/images/reddit.png' title="Reddit" /></a>
+            
+                <a href='https://twitter.com/StaticGenie' target='_blank'><img src='/assets/images/twitter.png' title="Twitter" /></a>
+            
+        </div>
+        <ul>
+            <li class='logo'><a href='/index.html'>StaticGenie</a></li>
+            <li class='sep'>|</li>
+            
+                <li><a href='/index.html'>Home</a></li>
+            
+                <li><a href='/docs/getting-started/installation.html'>Docs</a></li>
+            
+                <li><a href='/roadmap.html'>Roadmap</a></li>
+            
+        </ul>
+    </div>
+</nav>
+        
+<section class='jumbotron'>
+    Commands
+</section>
+
+        <section class='canvas constrict'>
+            <div class='toc'>
+                <ul>
+                
+                    <li>
+                        Getting Started
+                        <ul>
+                            
+                                <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
+                            
+                                <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
+                            
+                                <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        Core
+                        <ul>
+                            
+                                <li><a href='/docs/core/services.html'>Services</a></li>
+                            
+                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                            
+                                <li><a href='/docs/core/libs.html'>Libs</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        How To
+                        <ul>
+                            
+                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                            
+                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                            
+                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                            
+                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        Advanced
+                        <ul>
+                            
+                                <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
+                            
+                                <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
+                            
+                                <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
+                            
+                        </ul>
+                    </li>
+                
+            </ul>
+            </div>
+            <div class='page'>
+                <h1>Running Commands Inside Docker</h1>
+<p>Since everything is dockerised. All commands should be run through <code>docker-compose</code>. Remember to run these within the projects working directory.</p>
+<p>To run a command;</p>
+<p><code>docker-compose run --service-ports sg {command-goes-here}</code></p>
+<h1>Common Commands</h1>
+<ul>
+<li><code>docker-compose run sg npm install --save {package-name}</code> - Install a new package</li>
+<li><code>docker-compose run sg npm install --save @types/{package-name}</code> - Save new typescript types</li>
+<li><code>docker-compose run --service-ports sg npm start</code> - Complete a build from start to finish &amp; make available at <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a></li>
+</ul>
+<h1>NPM Commands</h1>
+<p>When you wish to run StaticGenie NPM commands. Use the following command:</p>
+<p><code>docker-compose run --service-ports sg npm run {commands-below}</code>.</p>
+<h2>Available NPM Commands</h2>
+<p>Common / Dev</p>
+<ul>
+<li><code>start</code> - runs all the build scripts in order and finishes by hosting them via a build in web server (start here)</li>
+<li><code>server</code> - Creates a server that serves your ./www directory (generated by StaticGenie) - For dev/test purposes only</li>
+<li><code>test</code> - @TODO - Compile and tests the javascript (although this isn’t working yet)</li>
+</ul>
+<p>Runners</p>
+<ul>
+<li><code>build:fresh</code> - Removes files generated from the previous run. Ensures everything is clean and no previous artifacts left behind</li>
+<li><code>build:typescript</code> - Converts the typescript to javascript</li>
+<li><code>build:pages</code> - Builds your web pages</li>
+<li><code>build:assets</code> - Copies over any supporting assets .css, .js, .jpg etc from <code>/theme/assets</code> to the <code>/www/assets</code> directory</li>
+<li><code>build:clean</code> - Cleans up any temporary artifacts such as compiled typescript ready for the next build</li>
+<li><code>build:optimise</code> - @TODO - Will perform optimisations like CSS/JS minification, etc</li>
+</ul>
+<h2>Locating NPM Commands</h2>
+<p>In the event the docs aren’t up to date and/or a command isn’t doing what you want it to. You can check the commands by opening <code>/package.json</code> to see/modify the StaticGenie commands.</p>
+<h1>Troubleshooting</h1>
+<blockquote>
+<p>Trying to access the built in server via <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a> times out.</p>
+</blockquote>
+<p>You have likely missed the <code>--service-ports</code> part of the <code>docker-compose run</code> command. Without it the adhock command to the docker container won’t open/map ports. The full command should look like: <code>docker-compose run --service-ports sg npm run {npm-command-here}</code></p>
+
+            </div>
+        </section>
+        <footer>
+    <div class='links'>&nbsp;&nbsp;<a href='/contact.html'>Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/credits.html'>Credits</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/license-and-terms.html'>License &amp; Terms</a>&nbsp;&nbsp;</div>
+    <div class='copyright'>Copyright &copy; 2020 StaticGenie, All Rights Reserved</div>
+</footer>
+    </body>
+</html>

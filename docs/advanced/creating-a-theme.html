@@ -1,0 +1,150 @@
+<html>
+    <head>
+        <title>StaticGenie</title>
+<link rel="stylesheet" href="/assets/global.css" />
+        <style>
+            .toc {
+                float:left;
+                width:150px;
+            }
+            .toc > ul > li {
+                padding-bottom:30px;
+                font-weight:bold;
+                line-height:1.3;
+            }
+            .toc > ul > li > ul > li {
+                padding-left:20px;
+                font-size:smaller;
+                font-weight:normal;
+                padding-top:8px;
+                line-height:1.3;
+            }
+            .page {
+                margin-left:180px;
+                padding-left:30px;
+                border-left: solid 1px #AAA;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+    <div class='constrict'>
+        <div class='social'>
+            
+                <a href='https://github.com/StaticGenie/StaticGenie' target='_blank'><img src='/assets/images/github.png' title="GitHub" /></a>
+            
+                <a href='https://reddit.com/u/StaticGenie' target='_blank'><img src='/assets/images/reddit.png' title="Reddit" /></a>
+            
+                <a href='https://twitter.com/StaticGenie' target='_blank'><img src='/assets/images/twitter.png' title="Twitter" /></a>
+            
+        </div>
+        <ul>
+            <li class='logo'><a href='/index.html'>StaticGenie</a></li>
+            <li class='sep'>|</li>
+            
+                <li><a href='/index.html'>Home</a></li>
+            
+                <li><a href='/docs/getting-started/installation.html'>Docs</a></li>
+            
+                <li><a href='/roadmap.html'>Roadmap</a></li>
+            
+        </ul>
+    </div>
+</nav>
+        
+<section class='jumbotron'>
+    Creating A Theme
+</section>
+
+        <section class='canvas constrict'>
+            <div class='toc'>
+                <ul>
+                
+                    <li>
+                        Getting Started
+                        <ul>
+                            
+                                <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
+                            
+                                <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
+                            
+                                <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        Core
+                        <ul>
+                            
+                                <li><a href='/docs/core/services.html'>Services</a></li>
+                            
+                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                            
+                                <li><a href='/docs/core/libs.html'>Libs</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        How To
+                        <ul>
+                            
+                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                            
+                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                            
+                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                            
+                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        Advanced
+                        <ul>
+                            
+                                <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
+                            
+                                <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
+                            
+                                <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
+                            
+                        </ul>
+                    </li>
+                
+            </ul>
+            </div>
+            <div class='page'>
+                <h1>What is a theme</h1>
+<p>A theme is where all the HTML and assets (images, javascript, css, etc) are located. The theme will use a rendering engine such as EJS (as is the case with StaticGenie) to construct web pages.</p>
+<h1>Creating a theme</h1>
+<p>Everything relating to a theme belongs within the <code>/theme</code> directory. It’s completely seperate from the data of the website.</p>
+<h2>Assets</h2>
+<p>Place any supporting assets within <code>/theme/assets</code> such as .css, .jpg, and .js files. These will be copied straight over to the final website accessible via <code>/www/assets/*</code></p>
+<h2>Layouts</h2>
+<p>Place any layouts inside <code>/theme/layouts</code>. These are the root layouts used to generate web pages from.</p>
+<h2>Partials</h2>
+<p>Any snippets of template (partials) you wish to include should go here.</p>
+<p>If you’re using the default renderer (EJS) you can include EJS files like this <code>&lt;%- include(&quot;/header&quot;) %&gt;</code>. The root directory of where to search for partials will already be set to <code>/theme/partials</code>.</p>
+<h2>Package</h2>
+<p>The <code>/theme/package.ts</code> file contains the configuration keys required by the theme. You can create anything you like in this file, but, you MUST export an interface called <code>iThemeConfigData</code> that defines all the theme keys used by your theme. This should be used within the <code>/config.ts</code> file to ensure the person using your theme includes the expected key/values (strongly typed).</p>
+<h2>Config</h2>
+<p>Within <code>/config.ts</code> locate the string <code>data: &lt;iThemeConfigData&gt;{</code> within the theme service provider. This is where you configure the theme. When the theme is loaded into the StaticGenie app it will be frozen (no longer changeable).</p>
+<h2>Model</h2>
+<p>When building a theme, you need to be able to render useful data! Thankfully you can access 3 models within your layouts/partials using the following keys:</p>
+<ul>
+<li><code>theme.{key}</code> - Theme settings. You can see what keys are defined within <code>/config.ts</code> within the <code>theme</code> service provider under the <code>data</code> key</li>
+<li><code>global.{key}</code> - Global model generated when all plugins initialise, stored within the <code>globalmodel</code> service provider. Refer to individual plugins documentation (or its <code>intialise()</code> method) for the keys made available</li>
+<li><code>page.{key}</code> - Page specific values defined by plugins when generating the specific page. Refer to individual plugins documentation (or its <code>generate()</code> method) for the keys made available</li>
+</ul>
+
+            </div>
+        </section>
+        <footer>
+    <div class='links'>&nbsp;&nbsp;<a href='/contact.html'>Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/credits.html'>Credits</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/license-and-terms.html'>License &amp; Terms</a>&nbsp;&nbsp;</div>
+    <div class='copyright'>Copyright &copy; 2020 StaticGenie, All Rights Reserved</div>
+</footer>
+    </body>
+</html>

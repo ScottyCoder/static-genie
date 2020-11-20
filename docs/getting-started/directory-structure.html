@@ -53,7 +53,7 @@
 </nav>
         
 <section class='jumbotron'>
-    Creating A Theme
+    Directory Structure
 </section>
 
         <section class='canvas constrict'>
@@ -74,6 +74,34 @@
                     </li>
                 
                     <li>
+                        Core
+                        <ul>
+                            
+                                <li><a href='/docs/core/services.html'>Services</a></li>
+                            
+                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                            
+                                <li><a href='/docs/core/libs.html'>Libs</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
+                        How To
+                        <ul>
+                            
+                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                            
+                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                            
+                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                            
+                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                            
+                        </ul>
+                    </li>
+                
+                    <li>
                         Advanced
                         <ul>
                             
@@ -89,27 +117,31 @@
             </ul>
             </div>
             <div class='page'>
-                <h1>What is a theme</h1>
-<p>A theme is where all the HTML and assets (images, javascript, css, etc) are located. The theme will use a rendering engine such as EJS (as is the case with StaticGenie) to construct web pages.</p>
-<h1>Creating a theme</h1>
-<p>Everything relating to a theme belongs within the <code>/theme</code> directory. It’s completely seperate from the data of the website.</p>
-<h2>Assets</h2>
-<p>Place any supporting assets within <code>/theme/assets</code> such as .css, .jpg, and .js files. These will be copied straight over to the final website accessible via <code>/www/assets/*</code></p>
-<h2>Layouts</h2>
-<p>Place any layouts inside <code>/theme/layouts</code>. These are the root layouts used to generate web pages from.</p>
-<h2>Partials</h2>
-<p>Any snippets of template (partials) you wish to include should go here.</p>
-<p>If you’re using the default renderer (EJS) you can include EJS files like this <code>&lt;%- include(&quot;/header&quot;) %&gt;</code>. The root directory of where to search for partials will already be set to <code>/theme/partials</code>.</p>
-<h2>Package</h2>
-<p>The <code>/theme/package.ts</code> file contains the configuration keys required by the theme. You can create anything you like in this file, but, you MUST export an interface called <code>iThemeConfigData</code> that defines all the theme keys used by your theme. This should be used within the <code>/config.ts</code> file to ensure the person using your theme includes the expected key/values (strongly typed).</p>
-<h2>Config</h2>
-<p>Within <code>/config.ts</code> locate the string <code>data: &lt;iThemeConfigData&gt;{</code> within the theme service provider. This is where you configure the theme. When the theme is loaded into the StaticGenie app it will be frozen (no longer changeable).</p>
-<h2>Model</h2>
-<p>When building a theme, you need to be able to render useful data! Thankfully you can access 3 models within your layouts/partials using the following keys:</p>
+                <h1>Summary</h1>
 <ul>
-<li><code>theme.{key}</code> - Theme settings. You can see what keys are defined within <code>/config.ts</code> within the <code>theme</code> service provider under the <code>data</code> key</li>
-<li><code>global.{key}</code> - Global model generated when all plugins initialise, stored within the <code>globalmodel</code> service provider. Refer to individual plugins documentation (or its <code>intialise()</code> method) for the keys made available</li>
-<li><code>page.{key}</code> - Page specific values defined by plugins when generating the specific page. Refer to individual plugins documentation (or its <code>generate()</code> method) for the keys made available</li>
+<li><code>/data/{plugin}</code> - Data used by the respective plugin</li>
+<li><code>/src</code> - The StaticGenie framework source code</li>
+<li><code>/src/libs</code> - The core framework files that tie everything together</li>
+<li><code>/src/plugins</code> - Plugins available to load via <code>/config.ts</code></li>
+<li><code>/src/services</code> - Services available to load via <code>/config.ts</code></li>
+<li><code>/theme/assets</code> - Any assets such as .css, .zip, .png, .js etc you want to add to your site. Accessible from the theme layouts via <code>/assets/*</code></li>
+<li><code>/theme/layouts</code> - In order to create any page with a unique look and feel (such as /contact.html with a contact form) it needs a layout. They are defined here.</li>
+<li><code>/theme/partials</code> - When you want a portion of html to be to shared across multiple layouts (e.g. header &amp; footer)</li>
+<li><code>/www</code> - Your generated website! Copy all the contents of this folder to your web host</li>
+<li><code>/tmp</code> - Where the compiled typescript will live. May or may not exist depending on which NPM Commands you use (some commands will delete the directory when it’s done)</li>
+<li><code>/node_modules</code> - Created when you run the <code>npm install</code> command inside docker. It’s all the 3rd party dependencies used by the framework and NPM commands.</li>
+</ul>
+<h2>Files</h2>
+<ul>
+<li><code>/config.ts</code> - General configuration of your website</li>
+<li><code>/docker-compose.yml</code> - Configures &amp; manages docker containers</li>
+<li><code>/Dockerfile</code> - Nodejs docker image used by docker-compose</li>
+<li><code>.gitignore</code> - What files should not be included in git commits</li>
+<li><code>LICENSE</code> - The StaticGenie license</li>
+<li><code>package.json</code> - NPM dependencies</li>
+<li><code>package-lock.json</code> - NPM dependencies lock</li>
+<li><code>README.MD</code> - Common practice and rendered by <a href="http://github.com">github.com</a> when viewing the repo</li>
+<li><code>tsconfig.json</code> - TypeScript configuration</li>
 </ul>
 
             </div>
