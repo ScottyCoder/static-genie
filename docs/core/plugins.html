@@ -58,69 +58,123 @@
 
         <section class='canvas constrict'>
             <div class='toc'>
+    <ul>
+        
+            <li>
+                Getting Started
                 <ul>
-                
-                    <li>
-                        Getting Started
-                        <ul>
-                            
-                                <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
-                            
-                                <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
-                            
-                                <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        Core
-                        <ul>
-                            
-                                <li><a href='/docs/core/services.html'>Services</a></li>
-                            
-                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
-                            
-                                <li><a href='/docs/core/libs.html'>Libs</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        How To
-                        <ul>
-                            
-                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
-                            
-                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
-                            
-                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
-                            
-                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        Advanced
-                        <ul>
-                            
-                                <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
-                            
-                                <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
-                            
-                                <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
-                            
-                        </ul>
-                    </li>
-                
-            </ul>
-            </div>
+                    
+                        <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
+                    
+                        <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
+                    
+                        <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                Core
+                <ul>
+                    
+                        <li><a href='/docs/core/services.html'>Services</a></li>
+                    
+                        <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                    
+                        <li><a href='/docs/core/libs.html'>Libs</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                How To
+                <ul>
+                    
+                        <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                    
+                        <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                    
+                        <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                    
+                        <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                Advanced
+                <ul>
+                    
+                        <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
+                    
+                        <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
+                    
+                        <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
+                    
+                </ul>
+            </li>
+        
+    </ul>
+</div>
             <div class='page'>
-                <h1>@TODO</h1>
-<ul>
-<li>pages</li>
-</ul>
+                <h1>Introduction</h1>
+<p>A plugin is responsible for generating web pages. They may uses various services to do this as well as it’s configuration (defined within <code>/config.ts</code>). There are a few plugins built into StaticGenie;</p>
+<h2>StandardPage</h2>
+<p>This is at the heart of StaticGenie. It’s a simple model -&gt; view setup and hence, creates a basic page.</p>
+<p>Create your page within <code>/data/standardpage</code> and name your file with the <code>.md</code> extension e.g. <code>/data/standardpage/about.md</code>. This page will contain all the data for the specific page.</p>
+<p>The <code>.md</code> file is broken down into 2 halves. The HEAD section which uses yaml syntax &amp; the BODY part (everything below =====) which uses markdown syntax.</p>
+<h3>Head Section</h3>
+<p>The first part of the file looks like this:</p>
+<pre><code>###########################################
+# HEAD
+###########################################
+
+config: 
+  layout: standardpage
+  file: /about/index.html
+
+page: 
+  key: value
+</code></pre>
+<p>The <code>config:</code> section is used by the plugin and not made available to the themes layouts</p>
+<p>The <code>page:</code> section is passed directly to the theme layout where the theme can render the bespoke data specifically when building that page</p>
+<h3>Body Section</h3>
+<p>The BODY section looks like this:</p>
+<pre><code>###########################################
+# BODY
+###########################################
+=====
+
+# Heading here...
+</code></pre>
+<p>Everything below the <code>=====</code> will be rendered as markdown and made available to the theme layout via the key <code>page.content</code>. If you try to define a <code>page.content</code> key within the HEAD section of the page it will error. Since <code>page.content</code> is reserved for use by the BODY of the page.</p>
+<h3>Full Example</h3>
+<p>Page <code>/data/standardpage/about.md</code></p>
+<pre><code>###########################################
+# HEAD
+###########################################
+
+config: 
+  layout: standardpage
+  file: /about.html
+
+page: 
+
+###########################################
+# BODY
+###########################################
+=====
+
+# About
+
+About text here...
+
+</code></pre>
+<p>Run StaticGenie <code>docker-compose run --service-ports sg npm start</code> and load up <code>http://127.0.0.1:8080/about.html</code>. The generated website will be in <code>/www</code>.</p>
+<h2>Blog</h2>
+<p>Check the <a href="/roadmap.html">Roadmap</a> for more information on the development of this plugin.</p>
+<h1>Creating A Plugin</h1>
+<p>In the event you want something more elaborate. Such as pulling data from a 3rd party resource and building pages based on such data. Read more about <a href="/docs/advanced/creating-a-plugin.html">creating a plugin</a></p>
 
             </div>
         </section>

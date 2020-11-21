@@ -58,72 +58,96 @@
 
         <section class='canvas constrict'>
             <div class='toc'>
+    <ul>
+        
+            <li>
+                Getting Started
                 <ul>
-                
-                    <li>
-                        Getting Started
-                        <ul>
-                            
-                                <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
-                            
-                                <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
-                            
-                                <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        Core
-                        <ul>
-                            
-                                <li><a href='/docs/core/services.html'>Services</a></li>
-                            
-                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
-                            
-                                <li><a href='/docs/core/libs.html'>Libs</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        How To
-                        <ul>
-                            
-                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
-                            
-                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
-                            
-                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
-                            
-                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        Advanced
-                        <ul>
-                            
-                                <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
-                            
-                                <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
-                            
-                                <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
-                            
-                        </ul>
-                    </li>
-                
-            </ul>
-            </div>
+                    
+                        <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
+                    
+                        <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
+                    
+                        <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                Core
+                <ul>
+                    
+                        <li><a href='/docs/core/services.html'>Services</a></li>
+                    
+                        <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                    
+                        <li><a href='/docs/core/libs.html'>Libs</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                How To
+                <ul>
+                    
+                        <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                    
+                        <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                    
+                        <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                    
+                        <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                Advanced
+                <ul>
+                    
+                        <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
+                    
+                        <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
+                    
+                        <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
+                    
+                </ul>
+            </li>
+        
+    </ul>
+</div>
             <div class='page'>
-                <h1>@TODO</h1>
+                <h1>What is a service provider?</h1>
+<p>A service provides capabilities mostly for plugins to use. Services are instantiated once by the framework and that same instance shared across all plugins. Services are accessed via interfaces to allow them to be switched out for different implementations.</p>
+<h1>Core Service Providers</h1>
+<p>There are a few service providers that come with StaticGenie</p>
+<p>They can be configured within the <code>/config.ts</code> file.</p>
+<h2>Global Model</h2>
+<p>Responsible for storing, freezing and passing around the global model. It’s primary use is for plugins to add data to it during the plugins initialisation. Once all plugins have initialised the model is then frozen and passed to plugins generate methods. Where plugins can query it for data to base it’s generated pages on. The service providers data is used by the theme service provider and hence, the global model data is made available to every layout via the key <code>global.*</code>.</p>
+<p>The global model uses the service name <code>globalmodel</code> and can be fetched like this; <code>services.get(&quot;globalmodel&quot;)</code></p>
+<p>It’s methods/properties you can use within your plugins are defined on it’s <code>iGlobalModel</code> interface located in <code>/src/services/globalmodel.ts</code>.</p>
+<p>The default global model class is <code>GlobalModel</code>.</p>
+<h2>Page Writer</h2>
+<p>Responsible for writing the pages once they have been built. This will define where the pages end up such as the console or the file system.</p>
+<p>The page writer uses the service name <code>pagewriter</code> and can be fetched like this; <code>services.get(&quot;pagewriter&quot;)</code></p>
+<p>It’s methods/properties you can use within your plugins are defined on it’s <code>iPageWriter</code> interface located in <code>/src/services/pagewriter.ts</code>.</p>
+<p>There are two page writer classes available, although, you will likely not need to change it from the default:</p>
 <ul>
-<li>globalmodel</li>
-<li>pagewriter</li>
-<li>report</li>
-<li>theme</li>
+<li><code>PageWriterFile</code> - The default which will write the pages to the file system within the <code>/www</code> directory</li>
+<li><code>PageWrtierConsole</code> - Will write the files to the console</li>
 </ul>
+<h2>Report</h2>
+<p>Responsible for showing which pages were or were not generated (but should have been generated).</p>
+<p>The report uses the service name <code>report</code> and can be fetched like this; <code>services.get(&quot;report&quot;)</code></p>
+<p>It’s methods/properties you can use within your plugins are defined on it’s <code>iReport</code> interface located in <code>/src/services/report.ts</code>.</p>
+<p>The default report class is <code>ReportConsole</code> which will print the report to the console.</p>
+<h2>Theme</h2>
+<p>Responsible for passing the model to the correct layout and rendering the result.</p>
+<p>The theme uses the service name <code>theme</code> and can be fetched like this; <code>services.get(&quot;theme&quot;)</code></p>
+<p>It’s methods/properties you can use within your plugins are defined on it’s <code>iTheme</code> interface located in <code>/src/services/theme.ts</code>.</p>
+<p>The default theme class is <code>ThemeEJS</code> which allows for EJS syntax within the .ejs layouts/partials.</p>
+<h1>Creating A Service</h1>
+<p>In the event you want to create a service. Such as interacting with Twitter or something more elaborate. Read more about <a href="/docs/advanced/creating-a-service.html">creating a service</a></p>
 
             </div>
         </section>

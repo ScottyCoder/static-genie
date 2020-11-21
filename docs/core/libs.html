@@ -58,72 +58,79 @@
 
         <section class='canvas constrict'>
             <div class='toc'>
+    <ul>
+        
+            <li>
+                Getting Started
                 <ul>
-                
-                    <li>
-                        Getting Started
-                        <ul>
-                            
-                                <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
-                            
-                                <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
-                            
-                                <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        Core
-                        <ul>
-                            
-                                <li><a href='/docs/core/services.html'>Services</a></li>
-                            
-                                <li><a href='/docs/core/plugins.html'>Plugins</a></li>
-                            
-                                <li><a href='/docs/core/libs.html'>Libs</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        How To
-                        <ul>
-                            
-                                <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
-                            
-                                <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
-                            
-                                <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
-                            
-                                <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
-                            
-                        </ul>
-                    </li>
-                
-                    <li>
-                        Advanced
-                        <ul>
-                            
-                                <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
-                            
-                                <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
-                            
-                                <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
-                            
-                        </ul>
-                    </li>
-                
-            </ul>
-            </div>
+                    
+                        <li><a href='/docs/getting-started/installation.html'>Installation</a></li>
+                    
+                        <li><a href='/docs/getting-started/commands.html'>Commands</a></li>
+                    
+                        <li><a href='/docs/getting-started/directory-structure.html'>Directory Structure</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                Core
+                <ul>
+                    
+                        <li><a href='/docs/core/services.html'>Services</a></li>
+                    
+                        <li><a href='/docs/core/plugins.html'>Plugins</a></li>
+                    
+                        <li><a href='/docs/core/libs.html'>Libs</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                How To
+                <ul>
+                    
+                        <li><a href='/docs/how-to/new-pages.html'>New Pages</a></li>
+                    
+                        <li><a href='/docs/how-to/bespoke-design.html'>Bespoke Design</a></li>
+                    
+                        <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
+                    
+                        <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
+                    
+                </ul>
+            </li>
+        
+            <li>
+                Advanced
+                <ul>
+                    
+                        <li><a href='/docs/advanced/creating-a-theme.html'>Creating A Theme</a></li>
+                    
+                        <li><a href='/docs/advanced/creating-a-service.html'>Creating A Service</a></li>
+                    
+                        <li><a href='/docs/advanced/creating-a-plugin.html'>Creating A Plugin</a></li>
+                    
+                </ul>
+            </li>
+        
+    </ul>
+</div>
             <div class='page'>
-                <h1>@TODO</h1>
-<ul>
-<li>app</li>
-<li>helpers</li>
-<li>plugins</li>
-<li>services</li>
-</ul>
+                <h1>What are libs?</h1>
+<p>They are the core libraries used to hold the framework together. They are located in <code>/src/libs</code>.</p>
+<h2>App</h2>
+<p>The app is the framework shell. It controls the stages of building an app, handles the plugins and services, passes services to plugins, controls the hooks, etc.</p>
+<h2>Helpers</h2>
+<p>Any generic helper functions that DO NOT have side effects i.e. calling them with the same params will ALWAYS give the same result. Nothing is permanent after calling the functions.</p>
+<p>Open the <code>/src/libs/helpers.ts</code> file to see all available helper functions you can use while developing services and plugins.</p>
+<p>At the time of writing this, there is only one helper;</p>
+<pre><code>export function getFilesSync(dir:string) : string[] {
+</code></pre>
+<h2>Services</h2>
+<p>Contains the services collection class that handles the initialisation of, storing and retrieving services.</p>
+<h2>Plugins</h2>
+<p>Contains the plugin interface that allows you to create custom plugins.</p>
 
             </div>
         </section>
