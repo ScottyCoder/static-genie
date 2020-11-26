@@ -96,8 +96,6 @@
                     
                         <li><a href='/docs/how-to/display-image.html'>Display Image</a></li>
                     
-                        <li><a href='/docs/how-to/reusable-html.html'>Reusable HTML</a></li>
-                    
                 </ul>
             </li>
         
@@ -114,26 +112,107 @@
                 </ul>
             </li>
         
+            <li>
+                Extras
+                <ul>
+                    
+                        <li><a href='/docs/extras/tips.html'>Tips</a></li>
+                    
+                </ul>
+            </li>
+        
     </ul>
 </div>
             <div class='page'>
                 <h1>The Challenge</h1>
 <p>You don’t want the standard markdown style home page. Let’s see how to add a youtube video (you could add much more but you will recognise how you could do that when you get there). Depending on your intended use of this bespoke design will depend on which option you use to achieve it.</p>
 <h2>Option 1 - New Theme Layout</h2>
-<p>If the entire page is going to change it’s design from the standard web design. You will need to create a new layout.</p>
-<p>@TODO how</p>
+<p>If the entire page is going to change it’s design from the existing layouts. You will need to create a new layout.</p>
+<p>Place a new .ejs file within <code>/theme/layouts</code></p>
+<p>Create your entirely new layout here. Remember, it can reference static assets via <code>/assets/*</code> and has access to the 3 models data <code>page.*</code>, <code>global.*</code> and <code>theme.*</code>. More on these 3 models <a href="/docs/advanced/creating-a-theme.html">here</a></p>
 <h2>Option 2 - New Theme Partial</h2>
 <p>If just a section of the page is going to change (which could be anywhere on an existing layout) and you would like to re-use that section on other pages such introducing a slideshow or in the case of this challenge, a youtube video. We would need to create a partial.</p>
-<p>@TODO how</p>
+<p>Place a new file within <code>/theme/partials</code> called <code>slideshow.ejs</code> with your re-usable template code like this:</p>
+<pre><code>&lt;% if (page.slideshow) { %&gt;
+  &lt;div class='sideshow'&gt;
+      &lt;% page.slowshow.forEach(slide =&gt; {
+        &lt;div class='&lt;%= slide.class %&gt;' data-img='&lt;%= slide.image %&gt;'&gt;&lt;/div&gt;
+      }) %&gt;
+  &lt;/div&gt;
+&lt;% } %&gt;
+</code></pre>
+<p>then open the layouts you wish to allow the slideshow to exist on such as <code>/theme/layouts/standardpage.ejs</code> and include the partial.</p>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;%- include(&quot;/head&quot;) %&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;%- include(&quot;/header&quot;) %&gt;
+        &lt;%- include(&quot;/jumbotron&quot;) %&gt;
+        &lt;section class='canvas constrict'&gt;
+            &lt;div class='page'&gt;
+                &lt;%- include(&quot;/slideshow&quot;) %&gt;
+                &lt;%- page.content %&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+        &lt;%- include(&quot;/footer&quot;) %&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Now on any pages that use the <code>standardpage</code> layout you simply define a page.slideshow array of objects with the image urls and class names. This will render the slideshow for you. Here would be an example page located within <code>/data/standardpages/picsofme.md</code></p>
+<pre><code>###########################################
+# HEAD
+###########################################
+
+config: 
+  layout: standardpage
+  file: /pics-of-me.html
+
+page:
+  slideshow:
+    - image: /assets/images/image1.png 
+      class: &quot;slideshow&quot;
+    - image: /assets/images/image2.png 
+      class: &quot;slideshow&quot;
+    - image: /assets/images/image3.png 
+      class: &quot;slideshow&quot;
+
+
+###########################################
+# BODY
+###########################################
+=====
+
+</code></pre>
+<p>The page slideshow will be used by the partial to render the slideshow within the <code>/pics-of-me.html</code> page.</p>
 <h2>Option 3 - Embedded HTML Within Page</h2>
-<p>If you want the content section of a page to change on a one off occasion. You can embed the HTML directly in the page.</p>
-<p>@TODO how</p>
+<p>If you want the content section of a page to change on a one off occasion and you’re using the <code>standardpage</code> plugin. You can embed the HTML directly in the page like this:</p>
+<pre><code>###########################################
+# HEAD
+###########################################
+
+config: 
+  layout: standardpage
+  file: /pics-of-me.html
+
+page:
+
+###########################################
+# BODY
+###########################################
+=====
+
+html here... literally just use html like &lt;div&gt;this&lt;/div&gt; :) 
+
+Although you will get no re-use capabalities so be careful implementing things this way.
+</code></pre>
 
             </div>
         </section>
         <footer>
     <div class='links'>&nbsp;&nbsp;<a href='/contact.html'>Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/credits.html'>Credits</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='/license-and-terms.html'>License &amp; Terms</a>&nbsp;&nbsp;</div>
     <div class='copyright'>Copyright &copy; 2020 StaticGenie, All Rights Reserved</div>
+    <div class='generated-by'>Generated by <a href='https://staticgenie.com' targe='_blank'>StaticGenie</a> (Open Source, TypeScript)</div>
 </footer>
     </body>
 </html>
